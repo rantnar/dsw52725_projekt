@@ -138,7 +138,7 @@ class LoginViewState extends State<LoginView> {
                         child: TextButton(
                           onPressed: () {},
                           style: ButtonStyle(
-                            foregroundColor: MaterialStateProperty.all(MyColors.purpleColor),
+                            foregroundColor: WidgetStateProperty.all(MyColors.purpleColor),
                           ),
                           child: const Text('Forgot Password?'),
                         ),
@@ -148,10 +148,10 @@ class LoginViewState extends State<LoginView> {
                           ? const CircularProgressIndicator()
                           : ElevatedButton(
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(MyColors.lightpurpleColor),
-                                foregroundColor: MaterialStateProperty.all(MyColors.whiteColor),
-                                minimumSize: MaterialStateProperty.all(const Size(double.infinity, 40)),
-                                shape: MaterialStateProperty.all(
+                                backgroundColor: WidgetStateProperty.all(MyColors.lightpurpleColor),
+                                foregroundColor: WidgetStateProperty.all(MyColors.whiteColor),
+                                minimumSize: WidgetStateProperty.all(const Size(double.infinity, 40)),
+                                shape: WidgetStateProperty.all(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
@@ -173,7 +173,7 @@ class LoginViewState extends State<LoginView> {
                               );
                             },
                             style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all(MyColors.purpleColor),
+                              foregroundColor: WidgetStateProperty.all(MyColors.purpleColor),
                             ),
                             child: const Text('Sign Up'),
                           ),
