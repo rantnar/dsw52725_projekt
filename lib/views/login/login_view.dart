@@ -1,4 +1,5 @@
 import 'package:dsw52725_projekt/utils/my_images.dart';
+import 'package:dsw52725_projekt/views/home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:dsw52725_projekt/utils/my_colors.dart';
 import '../register/register_view.dart';
@@ -21,8 +22,7 @@ class LoginViewState extends State<LoginView> {
         _isLoading = true;
       });
 
-      // Simulate a login process
-      Future.delayed(const Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 3), () {
         setState(() {
           _isLoading = false;
         });
@@ -30,7 +30,7 @@ class LoginViewState extends State<LoginView> {
         if (mounted) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const RegisterView()),
+            MaterialPageRoute(builder: (context) => const HomeView()),
           );
         }
       });

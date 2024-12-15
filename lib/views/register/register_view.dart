@@ -2,22 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:dsw52725_projekt/utils/my_colors.dart';
 import 'package:dsw52725_projekt/views/login/login_view.dart';
 
+import '../home/home_view.dart';
+
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
 
   @override
-  _RegisterViewState createState() => _RegisterViewState();
+  RegisterViewState createState() => RegisterViewState();
 }
 
-class _RegisterViewState extends State<RegisterView> {
+class RegisterViewState extends State<RegisterView> {
   final _formKey = GlobalKey<FormState>();
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
   void _submit() {
     if (_formKey.currentState!.validate()) {
-      // Handle registration logic here
+      // TODO: registration logic
+
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeView()),
+            (Route<dynamic> route) => false,
+      );
     }
   }
 
@@ -210,10 +218,10 @@ class _RegisterViewState extends State<RegisterView> {
                           ? const CircularProgressIndicator()
                           : ElevatedButton(
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(MyColors.lightpurpleColor),
-                                foregroundColor: MaterialStateProperty.all(MyColors.whiteColor),
-                                minimumSize: MaterialStateProperty.all(const Size(double.infinity, 50)),
-                                shape: MaterialStateProperty.all(
+                                backgroundColor: WidgetStateProperty.all(MyColors.lightpurpleColor),
+                                foregroundColor: WidgetStateProperty.all(MyColors.whiteColor),
+                                minimumSize: WidgetStateProperty.all(const Size(double.infinity, 50)),
+                                shape: WidgetStateProperty.all(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
@@ -241,7 +249,7 @@ class _RegisterViewState extends State<RegisterView> {
                               );
                             },
                             style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all(MyColors.purpleColor),
+                              foregroundColor: WidgetStateProperty.all(MyColors.purpleColor),
                             ),
                             child: const Text('Sign In'),
                           ),
