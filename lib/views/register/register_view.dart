@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dsw52725_projekt/utils/my_colors.dart';
 import 'package:dsw52725_projekt/views/login/login_view.dart';
-
 import '../home/home_view.dart';
 
 class RegisterView extends StatefulWidget {
@@ -24,7 +23,7 @@ class RegisterViewState extends State<RegisterView> {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const HomeView()),
-            (Route<dynamic> route) => false,
+        (Route<dynamic> route) => false,
       );
     }
   }
@@ -89,7 +88,8 @@ class RegisterViewState extends State<RegisterView> {
                               ),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            prefixIcon: Icon(Icons.person_outline_rounded,
+                            prefixIcon: Icon(
+                              Icons.person_outline_rounded,
                               color: MyColors.purpleColor,
                             ),
                           ),
@@ -117,7 +117,8 @@ class RegisterViewState extends State<RegisterView> {
                               ),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            prefixIcon: Icon(Icons.email_outlined,
+                            prefixIcon: Icon(
+                              Icons.email_outlined,
                               color: MyColors.purpleColor,
                             ),
                           ),
@@ -145,7 +146,8 @@ class RegisterViewState extends State<RegisterView> {
                               ),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            prefixIcon: Icon(Icons.lock_outline_rounded,
+                            prefixIcon: Icon(
+                              Icons.lock_outline_rounded,
                               color: MyColors.purpleColor,
                             ),
                             suffixIcon: IconButton(
@@ -187,7 +189,8 @@ class RegisterViewState extends State<RegisterView> {
                               ),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            prefixIcon: Icon(Icons.lock_outline_rounded,
+                            prefixIcon: Icon(
+                              Icons.lock_outline_rounded,
                               color: MyColors.purpleColor,
                             ),
                             suffixIcon: IconButton(
@@ -199,7 +202,8 @@ class RegisterViewState extends State<RegisterView> {
                               ),
                               onPressed: () {
                                 setState(() {
-                                  _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
+                                  _isConfirmPasswordVisible =
+                                      !_isConfirmPasswordVisible;
                                 });
                               },
                             ),
@@ -218,9 +222,12 @@ class RegisterViewState extends State<RegisterView> {
                           ? const CircularProgressIndicator()
                           : ElevatedButton(
                               style: ButtonStyle(
-                                backgroundColor: WidgetStateProperty.all(MyColors.lightpurpleColor),
-                                foregroundColor: WidgetStateProperty.all(MyColors.whiteColor),
-                                minimumSize: WidgetStateProperty.all(const Size(double.infinity, 50)),
+                                backgroundColor: WidgetStateProperty.all(
+                                    MyColors.lightpurpleColor),
+                                foregroundColor: WidgetStateProperty.all(
+                                    MyColors.whiteColor),
+                                minimumSize: WidgetStateProperty.all(
+                                    const Size(double.infinity, 50)),
                                 shape: WidgetStateProperty.all(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
@@ -240,16 +247,18 @@ class RegisterViewState extends State<RegisterView> {
                               color: MyColors.purpleColor,
                             ),
                           ),
-                          //text color purple 
+                          //text color purple
                           TextButton(
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const LoginView()),
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginView()),
                               );
                             },
                             style: ButtonStyle(
-                              foregroundColor: WidgetStateProperty.all(MyColors.purpleColor),
+                              foregroundColor:
+                                  WidgetStateProperty.all(MyColors.purpleColor),
                             ),
                             child: const Text('Sign In'),
                           ),
