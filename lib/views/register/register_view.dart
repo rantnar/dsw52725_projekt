@@ -19,6 +19,7 @@ class RegisterViewState extends State<RegisterView> {
   void _submit() {
     if (_formKey.currentState!.validate()) {
       // TODO: registration logic
+      //TODO SharedPreferences
 
       Navigator.pushAndRemoveUntil(
         context,
