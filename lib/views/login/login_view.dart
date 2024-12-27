@@ -3,6 +3,7 @@ import 'package:dsw52725_projekt/views/home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:dsw52725_projekt/utils/my_colors.dart';
 import '../register/register_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -15,23 +16,40 @@ class LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   bool _isPasswordVisible = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  void _submit() {
+  void _submit() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
 
-      Future.delayed(const Duration(seconds: 3), () {
+      Future.delayed(const Duration(seconds: 3), () async {
         setState(() {
           _isLoading = false;
         });
 
         if (mounted) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const HomeView()),
-          );
+          String exampleEmail = "example@example.com";
+          String examplePassword = "password123";
+          String enteredEmail = _emailController.text;
+          String enteredPassword = _passwordController.text;
+
+          if (enteredEmail == exampleEmail &&
+              enteredPassword == examplePassword) {
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.setBool('isLoggedIn', true);
+
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeView()),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Invalid email or password')),
+            );
+          }
         }
       });
     }
@@ -66,6 +84,7 @@ class LoginViewState extends State<LoginView> {
                       SizedBox(
                         height: 40,
                         child: TextFormField(
+                          controller: _emailController,
                           decoration: InputDecoration(
                             labelStyle: const TextStyle(
                               color: Colors.grey,
@@ -78,7 +97,8 @@ class LoginViewState extends State<LoginView> {
                               ),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            prefixIcon: Icon(Icons.person_outline_rounded,
+                            prefixIcon: Icon(
+                              Icons.person_outline_rounded,
                               color: MyColors.purpleColor,
                             ),
                             prefixIconColor: MyColors.lightpurpleColor,
@@ -95,34 +115,34 @@ class LoginViewState extends State<LoginView> {
                       SizedBox(
                         height: 40,
                         child: TextFormField(
+                          controller: _passwordController,
                           decoration: InputDecoration(
-                            labelStyle: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 14,
-                            ),
-                            labelText: 'Password',
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
+                              labelStyle: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 14,
                               ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            prefixIcon: Icon(Icons.lock_outline_rounded,
-                              color: MyColors.lightpurpleColor,
-                            ),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _isPasswordVisible
-                                    ? Icons.visibility_outlined
-                                    : Icons.visibility_off_outlined,
-                                color: MyColors.purpleColor,
+                              labelText: 'Password',
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  _isPasswordVisible = !_isPasswordVisible;
-                                });
-                              },
-                            )
-                          ),
+                              prefixIcon: Icon(
+                                Icons.lock_outline_rounded,
+                                color: MyColors.lightpurpleColor,
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _isPasswordVisible
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off_outlined,
+                                  color: MyColors.purpleColor,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _isPasswordVisible = !_isPasswordVisible;
+                                  });
+                                },
+                              )),
                           obscureText: !_isPasswordVisible,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -138,7 +158,8 @@ class LoginViewState extends State<LoginView> {
                         child: TextButton(
                           onPressed: () {},
                           style: ButtonStyle(
-                            foregroundColor: WidgetStateProperty.all(MyColors.purpleColor),
+                            foregroundColor:
+                                WidgetStateProperty.all(MyColors.purpleColor),
                           ),
                           child: const Text('Forgot Password?'),
                         ),
@@ -148,9 +169,12 @@ class LoginViewState extends State<LoginView> {
                           ? const CircularProgressIndicator()
                           : ElevatedButton(
                               style: ButtonStyle(
-                                backgroundColor: WidgetStateProperty.all(MyColors.lightpurpleColor),
-                                foregroundColor: WidgetStateProperty.all(MyColors.whiteColor),
-                                minimumSize: WidgetStateProperty.all(const Size(double.infinity, 40)),
+                                backgroundColor: WidgetStateProperty.all(
+                                    MyColors.lightpurpleColor),
+                                foregroundColor: WidgetStateProperty.all(
+                                    MyColors.whiteColor),
+                                minimumSize: WidgetStateProperty.all(
+                                    const Size(double.infinity, 40)),
                                 shape: WidgetStateProperty.all(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
@@ -164,20 +188,23 @@ class LoginViewState extends State<LoginView> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Don\'t have an account? ',
-                          style: TextStyle(
-                            color: MyColors.purpleColor,
-                          ),
+                          Text(
+                            'Don\'t have an account? ',
+                            style: TextStyle(
+                              color: MyColors.purpleColor,
+                            ),
                           ),
                           TextButton(
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const RegisterView()),
+                                MaterialPageRoute(
+                                    builder: (context) => const RegisterView()),
                               );
                             },
                             style: ButtonStyle(
-                              foregroundColor: WidgetStateProperty.all(MyColors.purpleColor),
+                              foregroundColor:
+                                  WidgetStateProperty.all(MyColors.purpleColor),
                             ),
                             child: const Text('Sign Up'),
                           ),
